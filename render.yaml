@@ -1,0 +1,33 @@
+# Render Blueprint — ASTRA (AICTE Unified Search) Phase-4 API
+#
+# Deploys the Dockerfile (root) as a free web service. The data lives in the
+# hosted PostgreSQL+pgvector (Neon) referenced by DATABASE_URL — no database
+# service is created here.
+#
+# To deploy:
+#   1. Push this repo to GitHub and connect it in the Render dashboard
+#      (render.com → New → Blueprint, pick anshxgaur/ASTRA).
+#   2. Set the two sync:false env vars below in Service → Environment:
+#        DATABASE_URL=postgresql://...   (your Neon/pgvector connection string)
+#        GROQ_API_KEY=gsk_...            (Groq; optional — app serves mock
+#                                         retrieved-context answers without it)
+#
+# First deploy may take a few minutes (image build). Free services spin down
+# after ~15 min idle and wake on the next request (~30-60s cold start).
+services:
+  - type: web
+    name: astra-search
+    runtime: docker
+    repo: https://github.com/anshxgaur/ASTRA
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
