@@ -1,77 +1,77 @@
 {
-  "run_timestamp": "2026-09-05T00:26:37",
+  "run_timestamp": "2026-09-05T22:18:20",
   "status": "ok",
   "error": "",
-  "duration_seconds": 360.06,
+  "duration_seconds": 317.61,
   "use_real_sources": true,
   "stages": [
     {
       "name": "01 Ingestion",
       "status": "ok",
       "note": "real Phase-1 sources — 8 sources",
-      "seconds": 0.86,
+      "seconds": 0.77,
       "rows": 3859
     },
     {
       "name": "02 Schema Discovery",
       "status": "ok",
-      "seconds": 0.1,
+      "seconds": 0.04,
       "note": "102 fields profiled"
     },
     {
       "name": "03 Schema Mapping",
       "status": "ok",
-      "seconds": 0.02,
+      "seconds": 0.01,
       "rows": 3859,
       "note": "8 sources mapped"
     },
     {
       "name": "04 Standardization",
       "status": "ok",
-      "seconds": 0.1,
+      "seconds": 0.05,
       "rows": 3859,
       "note": "states / booleans / text normalized"
     },
     {
       "name": "05 Normalization",
       "status": "ok",
-      "seconds": 0.1,
+      "seconds": 0.06,
       "rows": 3859,
       "note": "dtypes cast to canonical schema"
     },
     {
       "name": "06 Entity Resolution",
       "status": "ok",
-      "seconds": 7.09,
+      "seconds": 9.19,
       "rows": 3859,
-      "note": "3859 records -> 681 master entities"
+      "note": "3859 records -> 682 master entities"
     },
     {
       "name": "07 Context Classification",
       "status": "ok",
-      "seconds": 0.02,
+      "seconds": 0.01,
       "note": "contextual fields: ['eligibility', 'description']"
     },
     {
       "name": "08 PostgreSQL Load",
       "status": "ok",
-      "seconds": 15.29,
-      "rows": 7742,
+      "seconds": 15.46,
+      "rows": 7744,
       "note": "institution/course/faculty/scholarship/approval/internship + lineage"
     },
     {
       "name": "09 Embeddings",
       "status": "ok",
-      "seconds": 336.32,
-      "rows": 3871,
+      "seconds": 291.88,
+      "rows": 3872,
       "note": "fastembed all-MiniLM-L6-v2 (384-dim)"
     },
     {
       "name": "10 pgvector Index",
       "status": "ok",
-      "seconds": 0.05,
-      "rows": 3871,
-      "note": "3871 embeddings, 384-dim, HNSW=yes"
+      "seconds": 0.04,
+      "rows": 3872,
+      "note": "3872 embeddings, 384-dim, HNSW=yes"
     }
   ],
   "sources": {
@@ -118,22 +118,22 @@
   },
   "phase3": {
     "tables": {
-      "institution": 530,
+      "institution": 531,
       "course": 1403,
       "faculty": 864,
       "scholarship": 151,
       "approval": 273,
       "internship": 650,
-      "entity_mapping": 3871
+      "entity_mapping": 3872
     },
     "context_document": {
-      "rows": 3871,
+      "rows": 3872,
       "dims": 384,
       "hnsw_index": true
     }
   },
   "entity_resolution": {
     "records_in": 3859,
-    "entities_out": 681
+    "entities_out": 682
   }
 }

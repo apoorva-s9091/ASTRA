@@ -81,8 +81,11 @@ def ensure_database_and_schema() -> None:
             # pgvector context table (see 10_PGVECTOR)
             import sys
             sys.path.insert(0, str(PROJECT_ROOT / "10_PGVECTOR"))
-            from VECTOR_STORE import CREATE_CONTEXT_TABLE_SQL
+            from VECTOR_STORE import CREATE_CONTEXT_TABLE_SQL, REPAIR_CONTEXT_TABLE_SQL
             cur.execute(CREATE_CONTEXT_TABLE_SQL)
+            for stmt in REPAIR_CONTEXT_TABLE_SQL.split(";"):
+                if stmt.strip():
+                    cur.execute(stmt)
         conn.commit()
     print(f"[08] schema ready in '{dbname}' (institution, course, faculty, "
           f"scholarship, approval, lineage, context_document)")

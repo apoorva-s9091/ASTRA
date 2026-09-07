@@ -79,27 +79,27 @@ SCHEMA = {
         ("program_source", "TEXT", ""),
     ],
     "entity_mapping": [
-        ("id", "INTEGER", "PK"), ("master_entity_id", "TEXT", "NOT NULL"),
+        ("id", "SERIAL", "PK"), ("master_entity_id", "TEXT", "NOT NULL"),
         ("entity_type", "TEXT", "NOT NULL"), ("source_system", "TEXT", "NOT NULL"),
         ("source_database", "TEXT", "NOT NULL"), ("source_table", "TEXT", ""),
         ("source_record_id", "TEXT", "NOT NULL"), ("match_score", "REAL", ""),
-        ("created_at", "TIMESTAMPTZ", ""),
+        ("created_at", "TIMESTAMPTZ", "DEFAULT now()"),
     ],
     "data_lineage": [
-        ("id", "INTEGER", "PK"), ("canonical_entity_id", "TEXT", "NOT NULL"),
+        ("id", "SERIAL", "PK"), ("canonical_entity_id", "TEXT", "NOT NULL"),
         ("source_system", "TEXT", "NOT NULL"), ("source_database", "TEXT", "NOT NULL"),
         ("source_table", "TEXT", ""), ("source_record_id", "TEXT", ""),
         ("transformation_version", "TEXT", ""), ("validation_status", "TEXT", ""),
-        ("ingestion_timestamp", "TIMESTAMPTZ", ""),
+        ("ingestion_timestamp", "TIMESTAMPTZ", "DEFAULT now()"),
     ],
     "context_document": [
-        ("context_id", "INTEGER", "PK"), ("entity_id", "TEXT", "NOT NULL"),
+        ("context_id", "SERIAL", "PK"), ("entity_id", "TEXT", "NOT NULL"),
         ("entity_type", "TEXT", "NOT NULL"), ("context_type", "TEXT", ""),
         ("context_text", "TEXT", "NOT NULL"),
         ("embedding", f"VECTOR({EMBEDDING_DIMS})", ""),
         ("source_database", "TEXT", ""), ("source_table", "TEXT", ""),
-        ("source_record_id", "TEXT", ""), ("confidence", "REAL", ""),
-        ("created_at", "TIMESTAMPTZ", ""), ("data_version", "TEXT", ""),
+        ("source_record_id", "TEXT", ""), ("confidence", "REAL", "DEFAULT 1.0"),
+        ("created_at", "TIMESTAMPTZ", "DEFAULT now()"), ("updated_at", "TIMESTAMPTZ", "DEFAULT now()"), ("data_version", "TEXT", "DEFAULT 'v1'"),
     ],
 }
 
@@ -159,6 +159,9 @@ def create_schema(conn) -> None:
                 if extra == "PK":
                     d += " PRIMARY KEY"
                 elif extra == "NOT NULL":
+                    d += " NOT NULL"
+                elif extra.startswith("DEFAULT "):
+                    d += " " + extra
                     d += " NOT NULL"
                 defs.append(d)
             cur.execute(f'DROP TABLE IF EXISTS "{table}" CASCADE')

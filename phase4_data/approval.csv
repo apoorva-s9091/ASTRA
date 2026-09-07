@@ -29,7 +29,7 @@ APR_00027,INST_0313,nba,not accredited,,,,,19-06-2024
 APR_00028,INST_0428,nba,not accredited,02-03-2026,,,,20-06-2023
 APR_00029,INST_0395,nba,not accredited,16-11-2025,,,,09-03-2024
 APR_00030,INST_0167,nba,Not Accredited,,,,,13-05-2023
-APR_00031,INST_0521,nba,not accredited,31-10-2026,,,,28-09-2023
+APR_00031,INST_0522,nba,not accredited,31-10-2026,,,,28-09-2023
 APR_00032,INST_0469,nba,Not Accredited,,,,,17-03-2023
 APR_00033,INST_0015,nba,Not Accredited,,,,,07-04-2024
 APR_00034,INST_0026,nba,not accredited,02-11-2025,,,,30-05-2024
@@ -71,10 +71,10 @@ APR_00069,INST_0266,nba,ACCREDITED,13-11-2026,,,,09-10-2023
 APR_00070,INST_0397,nba,ACCREDITED,,,,,17-12-2023
 APR_00071,INST_0022,nba,accredited,29-06-2026,,,,09-01-2024
 APR_00072,INST_0200,nba,Not Accredited,11-02-2026,,,,14-02-2023
-APR_00073,INST_0522,nba,accredited,16-03-2026,,,,25-04-2023
-APR_00074,INST_0523,nba,accredited,18-05-2026,,,,10-05-2024
-APR_00075,INST_0524,nba,not accredited,22-12-2025,,,,06-06-2023
-APR_00076,INST_0525,nba,accredited,25-09-2025,,,,01-01-2023
+APR_00073,INST_0523,nba,accredited,16-03-2026,,,,25-04-2023
+APR_00074,INST_0524,nba,accredited,18-05-2026,,,,10-05-2024
+APR_00075,INST_0525,nba,not accredited,22-12-2025,,,,06-06-2023
+APR_00076,INST_0526,nba,accredited,25-09-2025,,,,01-01-2023
 APR_00077,INST_0008,nba,Accredited,26-09-2026,,,,16-03-2023
 APR_00078,INST_0089,nba,Accredited,27-11-2026,,,,16-02-2023
 APR_00079,INST_0175,nba,Accredited,24-02-2026,,,,26-09-2023
@@ -164,9 +164,9 @@ APR_00162,INST_0043,closed,,,2024,voluntarily closed,,2024/01/06
 APR_00163,INST_0191,closed,,,2023,Infrastructure non-compliance,,2024/02/07
 APR_00164,INST_0260,closed,,,2024,No admission for 3 consecutive years,,2023/06/14
 APR_00165,INST_0217,closed,,,2024,Merged with another institute,,2024/04/30
-APR_00166,INST_0524,closed,,,2023,Poor placement record,,2023/12/24
-APR_00167,INST_0525,closed,,,2018,Merged with another institute,,2023/11/07
-APR_00168,INST_0526,closed,,,2021,Merged with another institute,,2023/07/22
+APR_00166,INST_0525,closed,,,2023,Poor placement record,,2023/12/24
+APR_00167,INST_0526,closed,,,2018,Merged with another institute,,2023/11/07
+APR_00168,INST_0527,closed,,,2021,Merged with another institute,,2023/07/22
 APR_00169,INST_0004,closed,,,2019,Infrastructure non-compliance,,2023/03/18
 APR_00170,INST_0042,closed,,,2019,closed by regulatory order,,2023/03/15
 APR_00171,INST_0027,closed,,,2022,closed by regulatory order,,2023/03/01
@@ -262,10 +262,10 @@ APR_00260,INST_0113,unapproved,,,,,Alwar,23 Jun 2024
 APR_00261,INST_0364,unapproved,,,,,Gwalior,21 Aug 2023
 APR_00262,INST_0219,unapproved,,,,,Kolhapur,03 Apr 2023
 APR_00263,INST_0172,unapproved,,,,,Panipat,30 Mar 2023
-APR_00264,INST_0527,unapproved,,,,,Bikaner,25 Apr 2023
-APR_00265,INST_0528,unapproved,,,,,Haldia,22 Mar 2024
-APR_00266,INST_0529,unapproved,,,,,Etawah,29 Jun 2023
-APR_00267,INST_0530,unapproved,,,,,Jhansi,18 Feb 2024
+APR_00264,INST_0528,unapproved,,,,,Bikaner,25 Apr 2023
+APR_00265,INST_0529,unapproved,,,,,Haldia,22 Mar 2024
+APR_00266,INST_0530,unapproved,,,,,Etawah,29 Jun 2023
+APR_00267,INST_0531,unapproved,,,,,Jhansi,18 Feb 2024
 APR_00268,INST_0010,unapproved,,,,,Mandi,18 Jun 2023
 APR_00269,INST_0067,unapproved,,,,,Chennai,25 Feb 2023
 APR_00270,INST_0001,unapproved,,,,,Ajmer,16 Jul 2023

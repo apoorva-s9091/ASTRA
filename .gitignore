@@ -30,3 +30,6 @@ uvicorn.log
 
 # Extracted data
 extracted_data/
+
+# Local tooling (koyeb CLI etc.)
+tools/

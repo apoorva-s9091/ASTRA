@@ -134,3 +134,22 @@ CREATE INDEX IF NOT EXISTS idx_institution_state ON institution(state);
 CREATE INDEX IF NOT EXISTS idx_course_institution ON course(institution_id);
 CREATE INDEX IF NOT EXISTS idx_faculty_institution ON faculty(institution_id);
 CREATE INDEX IF NOT EXISTS idx_approval_institution ON approval(institution_id);
+
+-- ── Repair stale lineage tables (created by load_phase4_data.py / pre-SERIAL schema) ──
+-- CREATE TABLE IF NOT EXISTS never fixes an existing table: databases created
+-- by load_phase4_data.py (or an older schema) define id as plain
+-- "INTEGER PRIMARY KEY" with no sequence default. The loaders rely on the
+-- SERIAL default, so their INSERT (which omits id) fails with
+--   null value in column "id" of relation "entity_mapping" violates not-null constraint
+-- Every statement below is idempotent and a no-op on a correctly built DB.
+CREATE SEQUENCE IF NOT EXISTS entity_mapping_id_seq;
+ALTER TABLE entity_mapping ALTER COLUMN id SET DEFAULT nextval('entity_mapping_id_seq');
+ALTER SEQUENCE entity_mapping_id_seq OWNED BY entity_mapping.id;
+SELECT setval('entity_mapping_id_seq', COALESCE((SELECT MAX(id) FROM entity_mapping), 1), (SELECT MAX(id) FROM entity_mapping) IS NOT NULL);
+ALTER TABLE entity_mapping ALTER COLUMN created_at SET DEFAULT now();
+
+CREATE SEQUENCE IF NOT EXISTS data_lineage_id_seq;
+ALTER TABLE data_lineage ALTER COLUMN id SET DEFAULT nextval('data_lineage_id_seq');
+ALTER SEQUENCE data_lineage_id_seq OWNED BY data_lineage.id;
+SELECT setval('data_lineage_id_seq', COALESCE((SELECT MAX(id) FROM data_lineage), 1), (SELECT MAX(id) FROM data_lineage) IS NOT NULL);
+ALTER TABLE data_lineage ALTER COLUMN ingestion_timestamp SET DEFAULT now();

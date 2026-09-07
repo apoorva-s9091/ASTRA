@@ -35,6 +35,21 @@ CREATE TABLE IF NOT EXISTS context_document (
 );
 """
 
+REPAIR_CONTEXT_TABLE_SQL = """
+-- Repair a context_document table created by load_phase4_data.py (or an
+-- older schema): context_id is plain "INTEGER PRIMARY KEY" with no sequence
+-- default, so INSERTs that omit it fail with a not-null violation. Every
+-- statement below is idempotent and a no-op on a correctly built table.
+CREATE SEQUENCE IF NOT EXISTS context_document_context_id_seq;
+ALTER TABLE context_document ALTER COLUMN context_id SET DEFAULT nextval('context_document_context_id_seq');
+ALTER SEQUENCE context_document_context_id_seq OWNED BY context_document.context_id;
+SELECT setval('context_document_context_id_seq', COALESCE((SELECT MAX(context_id) FROM context_document), 1), (SELECT MAX(context_id) FROM context_document) IS NOT NULL);
+ALTER TABLE context_document ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ DEFAULT now();
+ALTER TABLE context_document ALTER COLUMN created_at SET DEFAULT now();
+ALTER TABLE context_document ALTER COLUMN confidence SET DEFAULT 1.0;
+ALTER TABLE context_document ALTER COLUMN data_version SET DEFAULT 'v1';
+"""
+
 BUILD_VECTOR_INDEX_SQL = f"""
 CREATE INDEX IF NOT EXISTS idx_context_embedding
     ON context_document USING hnsw (embedding vector_cosine_ops);
